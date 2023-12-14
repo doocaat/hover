@@ -173,7 +173,7 @@ func EngineConfig(targetOS string, mode build.Mode) string {
 	return fmt.Sprintf("%s-%s", targetOS, mode.Name)
 }
 
-//noinspection GoNameStartsWithPackageName
+// noinspection GoNameStartsWithPackageName
 func EngineCachePath(targetOS, cachePath string, mode build.Mode) string {
 	return filepath.Join(BaseEngineCachePath(cachePath), EngineConfig(targetOS, mode))
 }
@@ -285,13 +285,7 @@ func ValidateOrUpdateEngine(targetOS, cachePath, requiredEngineVersion string, m
 			log.Warnf("%v", err)
 		}
 		if targetOS == "darwin" {
-			frameworkZipPath := filepath.Join(engineExtractPath, "FlutterEmbedder.framework.zip")
-			frameworkDestPath := filepath.Join(engineExtractPath, "FlutterEmbedder.framework")
-			_, err = unzip(frameworkZipPath, frameworkDestPath)
-			if err != nil {
-				log.Errorf("Failed to unzip engine framework: %v", err)
-				os.Exit(1)
-			}
+			frameworkDestPath := filepath.Join(engineExtractPath, "FlutterEmbedder")
 			createSymLink("A", frameworkDestPath+"/Versions/Current")
 			createSymLink("Versions/Current/FlutterEmbedder", frameworkDestPath+"/FlutterEmbedder")
 			createSymLink("Versions/Current/Headers", frameworkDestPath+"/Headers")

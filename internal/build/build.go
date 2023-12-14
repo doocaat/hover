@@ -98,7 +98,7 @@ func EngineFiles(targetOS string, mode Mode) []string {
 		if mode.IsAot {
 			return []string{"libflutter_engine.dylib"}
 		} else {
-			return []string{"FlutterEmbedder.framework"}
+			return []string{"FlutterEmbedder"}
 		}
 	case "linux":
 		return []string{"libflutter_engine.so"}
